@@ -2,4 +2,6 @@
 a huobi coin api sign demo 一个火币网API的签名简单DEMO
 
 ## 更多内容  
-建议前往我的博客[歪克士](https://wicos.me)
+建议前往我的博客[歪克士wicos.me](https://wicos.me)  
+更多详细问题可以给我发邮件：wicos#wicos.me
+
