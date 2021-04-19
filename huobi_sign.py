@@ -1,6 +1,6 @@
 # -*- encoding: utf-8 -*-
 '''
-@File    :   test.py
+@File    :   sgin.py
 @Time    :   2021/03/10 20:22:16
 @Author  :   Wicos 
 @Version :   1.0
@@ -16,8 +16,8 @@ import urllib
 import datetime
 import hmac
 
-accesskey = "XXXXXXXX"
-secretkey = "YYYYYYYYY"
+accesskey = "XXXXX"
+secretkey = "YYYYY"
 
 class SIGN(object):
     def __init__(self, accesskey: str, secretkey: str):
@@ -32,9 +32,8 @@ class SIGN(object):
             "SignatureVersion": 2,
             "Timestamp": urllib.parse.quote(datetime.datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%S'))
         }
-        self.sorted_url = "&".join([i + "=" + str(data[i]) for i in sorted(param_data.keys())])
+        self.sorted_url = "&".join([i + "=" + str(param_data[i]) for i in sorted(param_data.keys())])
         sign_str = "GET\n" + self.url + "\n" + to_url + "\n" + self.sorted_url
-        print(sign_str)
         key = self.secretkey.encode('utf-8')
         message = sign_str.encode('utf-8')
         sign = base64.b64encode(
@@ -46,7 +45,6 @@ class SIGN(object):
         to_url = "/v1/account/accounts"
         siginature = self.sign(to_url)
         url = "https://" + self.url + to_url + "?" +self.sorted_url + "&Signature=" + siginature
-        print(url)
         get_data = requests.get(url)
         if get_data.status_code == 200:
             return get_data.json()
